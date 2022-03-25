@@ -21,18 +21,19 @@ public class PlayerController : MonoBehaviour
     private bool isOnGround = true;
     private bool jumped = false;
 
-    private int delay = 1;
     private bool inspectOn = false;
 
     private Rigidbody playerRb;
     private Transform playerCamera;
     private InspectRaycast inspectRaycast;
+    private GameObject crosshair;
 
     private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerCamera = Camera.main.transform;
         inspectRaycast = Camera.main.GetComponent<InspectRaycast>();
+        crosshair = GameObject.Find("Crosshair");
     }
 
     private void Update()
@@ -82,6 +83,8 @@ public class PlayerController : MonoBehaviour
                 inspectOn = false;
                 inspectRaycast.inspectOn = false;
             }
+
+            inspectRaycast.CrosshairChangeImage();
         }
 
         //move player forward/back, side-step left/right, look left/right

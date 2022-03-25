@@ -7,6 +7,7 @@ TagManager:
   - Bunny
   - Duck
   - InteractObject
+  - UseObject
   layers:
   - Default
   - TransparentFX
