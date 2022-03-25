@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 75172491762824880}
   - component: {fileID: 1935843589447035781}
   - component: {fileID: -5676786849092645654}
-  m_Layer: 0
+  - component: {fileID: -6426193592059336531}
+  m_Layer: 6
   m_Name: Duck
-  m_TagString: Duck
+  m_TagString: InteractObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,6 +74,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60d966c89f8fa7f4a8236ab2a8409bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6426193592059336531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106166758832834501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c785bf17fb55c1543952996244eccff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2909450154776805578

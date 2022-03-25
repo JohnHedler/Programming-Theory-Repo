@@ -21,13 +21,18 @@ public class PlayerController : MonoBehaviour
     private bool isOnGround = true;
     private bool jumped = false;
 
+    private int delay = 1;
+    private bool inspectOn = false;
+
     private Rigidbody playerRb;
     private Transform playerCamera;
+    private InspectRaycast inspectRaycast;
 
     private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerCamera = Camera.main.transform;
+        inspectRaycast = Camera.main.GetComponent<InspectRaycast>();
     }
 
     private void Update()
@@ -48,11 +53,13 @@ public class PlayerController : MonoBehaviour
 
     private void GetInputs()
     {
+        //assign user inputs
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
         mouseVerticalInput = Input.GetAxis("Mouse Y");
         mouseHorizontalInput = Input.GetAxis("Mouse X");
 
+        //change player's run speed
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             moveSpeed = runSpeed;
@@ -60,6 +67,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             moveSpeed = walkSpeed;
+        }
+
+        //enable/disable inspect mode
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (!inspectOn)
+            {
+                inspectOn = true;
+                inspectRaycast.inspectOn = true;
+            }
+            else
+            {
+                inspectOn = false;
+                inspectRaycast.inspectOn = false;
+            }
         }
 
         //move player forward/back, side-step left/right, look left/right
@@ -87,21 +109,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             isOnGround = false;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Bunny")
-        {
-            Bunny bunnyScript = collision.gameObject.GetComponent<Bunny>();
-            bunnyScript.GetDescription();
-        }
-
-        if (collision.gameObject.tag == "Duck")
-        {
-            Duck duckScript = collision.gameObject.GetComponent<Duck>();
-            duckScript.GetDescription();
         }
     }
 }

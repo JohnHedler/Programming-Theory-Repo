@@ -875,9 +875,10 @@ GameObject:
   - component: {fileID: 7548321745704998421}
   - component: {fileID: -5505513367887819078}
   - component: {fileID: 8904263626102726915}
-  m_Layer: 0
+  - component: {fileID: 7505961849952324513}
+  m_Layer: 6
   m_Name: Bunny
-  m_TagString: Bunny
+  m_TagString: InteractObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -938,3 +939,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5687097, y: 0.76644945, z: 0.7360091}
   m_Center: {x: -0.000025719404, y: 0.116775274, z: 0.026399016}
+--- !u!114 &7505961849952324513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8562790067184505062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c785bf17fb55c1543952996244eccff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -24,10 +24,11 @@ public class Bunny : Animal
     // Start is called before the first frame update
     void Start()
     {
-        nameOfAnimal = "Bunny Rabbit";
+        nameOfAnimal = "Bunny";
         color = "Gray";
         preferredFood = "Carrot";
 
+        name = nameOfAnimal;
         bunnyRb = GetComponent<Rigidbody>();
     }
 
@@ -84,7 +85,7 @@ public class Bunny : Animal
     protected override void Eat()
     {
         eaten = true;
-        Debug.Log($"{nameOfAnimal} eats a {preferredFood}.");
+        //Debug.Log($"{nameOfAnimal} eats a {preferredFood}.");
         StartCoroutine(EatDelay());
     }
 
@@ -94,9 +95,8 @@ public class Bunny : Animal
         eaten = false;
     }
 
-    public override void GetDescription()
+    public override string GetDescription()
     {
-        Text message = GameObject.Find("Text").GetComponent<Text>();
-        message.text += $"This is a {nameOfAnimal}. It is {color} in color. It likes {preferredFood}.\n";
+        return $"This is a {nameOfAnimal}. It is {color} in color. It likes {preferredFood}.\n";
     }
 }

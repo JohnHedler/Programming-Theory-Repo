@@ -27,6 +27,7 @@ public class Duck : Animal
         color = "White";
         preferredFood = "Corn";
 
+        name = nameOfAnimal;
         duckRb = GetComponent<Rigidbody>();
     }
 
@@ -81,7 +82,7 @@ public class Duck : Animal
     protected override void Eat()
     {
         eaten = true;
-        Debug.Log($"{nameOfAnimal} eats some {preferredFood}.");
+        //Debug.Log($"{nameOfAnimal} eats some {preferredFood}.");
         StartCoroutine(EatDelay());
     }
 
@@ -91,9 +92,8 @@ public class Duck : Animal
         eaten = false;
     }
 
-    public override void GetDescription()
+    public override string GetDescription()
     {
-        Text message = GameObject.Find("Text").GetComponent<Text>();
-        message.text += $"This is a {nameOfAnimal}. It is {color} in color. It likes {preferredFood}.\n";
+        return $"This is a {nameOfAnimal}. It is {color} in color. It likes {preferredFood}.\n";
     }
 }

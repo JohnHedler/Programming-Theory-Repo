@@ -12,5 +12,5 @@ public abstract class Animal : MonoBehaviour
     //methods
     protected abstract void Move();
     protected abstract void Eat();
-    public abstract void GetDescription();
+    public abstract string GetDescription();
 }
