@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private Transform playerCamera;
     private InspectRaycast inspectRaycast;
     private GameObject crosshair;
+    private UIHandler userInterface;
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
         playerCamera = Camera.main.transform;
         inspectRaycast = Camera.main.GetComponent<InspectRaycast>();
         crosshair = GameObject.Find("Crosshair");
+        userInterface = GameObject.Find("UI Handler").GetComponent<UIHandler>();
     }
 
     private void Update()
@@ -85,6 +87,12 @@ public class PlayerController : MonoBehaviour
             }
 
             inspectRaycast.CrosshairChangeImage();
+        }
+
+        //turn on/off tutorial panel
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            userInterface.ToggleTutorial();
         }
 
         //move player forward/back, side-step left/right, look left/right
