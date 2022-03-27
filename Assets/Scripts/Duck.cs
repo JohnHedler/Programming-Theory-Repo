@@ -43,6 +43,11 @@ public class Duck : Animal
         {
             Eat();
         }
+
+        if(transform.position.y < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void Move()

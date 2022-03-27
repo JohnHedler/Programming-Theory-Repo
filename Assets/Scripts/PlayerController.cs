@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     private GameObject crosshair;
     private UIHandler userInterface;
 
+    public Projectile projectilePrefab;
+    public GameObject firePoint;
+
     private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -70,6 +73,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             moveSpeed = walkSpeed;
+        }
+
+        //shoot projectiles
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Instantiate(projectilePrefab, firePoint.transform.position, transform.rotation);
         }
 
         //enable/disable inspect mode

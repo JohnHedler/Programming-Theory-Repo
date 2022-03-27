@@ -44,6 +44,11 @@ public class Bunny : Animal
         {
             Eat();
         }
+
+        if (transform.position.y < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void Move()

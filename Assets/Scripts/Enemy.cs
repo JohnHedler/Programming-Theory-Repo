@@ -6,7 +6,7 @@ public abstract class Enemy : MonoBehaviour
 {
     private HealthSystem playerHealth;
 
-    protected void Damage()
+    protected virtual void Damage()
     {
         playerHealth.health -= 1;
     }

@@ -8,6 +8,7 @@ TagManager:
   - Duck
   - InteractObject
   - UseObject
+  - Enemy
   layers:
   - Default
   - TransparentFX
