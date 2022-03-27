@@ -79,4 +79,7 @@ public class UIHandler : MonoBehaviour
             tutorialPanel.SetActive(true);
         }
     }
+
+    //ShowPlayerName function; displays user name taken from 'Title' scene into 'Main' scene.
+    //public void ShowPlayerName() { }
 }
