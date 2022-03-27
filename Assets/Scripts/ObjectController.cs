@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class ObjectController : MonoBehaviour
 {
+    //assigned object's name
     private string objectName;
 
+    //assigned object's description
     private string extraInfo;
 
     private InspectController inspectController;
 
     private void Start()
     {
+        //get the name and description of the objects
         objectName = name;
         
         if(name == "Bunny")
@@ -30,16 +33,19 @@ public class ObjectController : MonoBehaviour
         inspectController = GameObject.Find("Inspect Controller").GetComponent<InspectController>();
     }
 
+    //ShowObjectName function; display object name to user on HUD
     public void ShowObjectName()
     {
         inspectController.ShowName(objectName);
     }
 
+    //HideObjectName function; hide object name from user on HUD
     public void HideObjectName()
     {
         inspectController.HideName();
     }
 
+    //ShowExtraInfo function; show object description to user on HUD
     public void ShowExtraInfo()
     {
         inspectController.ShowAdditionalInfo(extraInfo);

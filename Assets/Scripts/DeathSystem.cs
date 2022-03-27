@@ -8,9 +8,11 @@ public class DeathSystem : MonoBehaviour
 
     private void Start()
     {
+        //get the game object script is assigned to
         entity = gameObject;
     }
 
+    //Defeated function; checks if object is player or not, then performs associated task.
     public void Defeated()
     {
         if(entity.name == "Player")

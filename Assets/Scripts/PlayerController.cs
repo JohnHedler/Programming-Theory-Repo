@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //player input variables
     private float verticalInput;
     private float horizontalInput;
     private float mouseHorizontalInput;
     private float mouseVerticalInput;
 
+    //player movement/look variables
     private float moveSpeed = 5.0f;
     private float runSpeed = 8.0f;
     private float walkSpeed = 5.0f;
@@ -26,9 +28,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private Transform playerCamera;
     private InspectRaycast inspectRaycast;
+
+    //UI variables
     private GameObject crosshair;
     private UIHandler userInterface;
 
+    //combat variables
     public Projectile projectilePrefab;
     public GameObject firePoint;
 
@@ -48,15 +53,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (jumped)
-        {
-            playerRb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
-            jumped = false;
-        }
-
-        GroundCheck();
+        Jump();
     }
 
+    //GetInputs function; receives all user input assigned and performs tasks associated with them.
     private void GetInputs()
     {
         //assign user inputs
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
             userInterface.ToggleTutorial();
         }
 
-        //move player forward/back, side-step left/right, look left/right
+        //move player forward/back, side-step left/right, turn left/right
         transform.Translate(Vector3.forward * moveSpeed * verticalInput * Time.deltaTime);
         transform.Translate(Vector3.right * moveSpeed * horizontalInput * Time.deltaTime);
         transform.Rotate(Vector3.up * lookSensitivity * mouseHorizontalInput * Time.deltaTime);
@@ -114,12 +114,27 @@ public class PlayerController : MonoBehaviour
         mouseXRotation = Mathf.Clamp(mouseXRotation, -maxLookRotation, maxLookRotation);
         playerCamera.localEulerAngles = new Vector3(-mouseXRotation, 0, 0);
 
+        //allow player to jump
         if (isOnGround && Input.GetKeyDown(KeyCode.Space))
         {
             jumped = true;
         }
     }
 
+    //Jump function; when jumped is set to true, add force to rigidbody of player so it jumps
+    private void Jump()
+    {
+        if (jumped)
+        {
+            playerRb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            jumped = false;
+        }
+
+        GroundCheck();
+    }
+
+    //GroundCheck function; check to see if player is not in the air to enable jumping.
+    //  If player is in the air, jumping is disabled.
     private void GroundCheck()
     {
         if (Physics.Raycast(transform.position, Vector3.down, distToGround + 0.1f))

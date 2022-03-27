@@ -45,12 +45,14 @@ public class Bunny : Animal
             Eat();
         }
 
+        //destroys object if it falls below map
         if (transform.position.y < 0)
         {
             Destroy(gameObject);
         }
     }
 
+    //overridden move function; randomly moves forward or turns
     protected override void Move()
     {
         moved = true;
@@ -81,25 +83,29 @@ public class Bunny : Animal
         StartCoroutine(MoveDelay());
     }
 
+    //delay between move times
     IEnumerator MoveDelay()
     {
         yield return new WaitForSeconds(moveDelayTime);
         moved = false;
     }
 
+    //overridden eat function; writes to debug that it ate (could do more than that)
     protected override void Eat()
     {
         eaten = true;
-        //Debug.Log($"{nameOfAnimal} eats a {preferredFood}.");
+        Debug.Log($"{nameOfAnimal} eats a {preferredFood}.");
         StartCoroutine(EatDelay());
     }
-
+    
+    //delay between eat times
     IEnumerator EatDelay()
     {
         yield return new WaitForSeconds(eatDelayTime);
         eaten = false;
     }
 
+    //overridden description method; returns name, color, and preferred food.
     public override string GetDescription()
     {
         return $"This is a {nameOfAnimal}. It is {color} in color. It likes {preferredFood}.\n";

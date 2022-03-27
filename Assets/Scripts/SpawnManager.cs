@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    //array of animal objects
     public GameObject[] animalList;
 
     // Start is called before the first frame update
     void Start()
     {
+        //at start, spawn animal objects repeatedly every 10 seconds
         InvokeRepeating("SpawnAnimal", 1, 10);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //SpawnAnimal function; picks a random animal object from array and spawns at the spawn manager location.
     private void SpawnAnimal()
     {
         int random = Random.Range(0, animalList.Length);

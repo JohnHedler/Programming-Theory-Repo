@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MetalDoor : Door
 {
-    //properties
+    //overridden properties from Door superclass
     protected override string nameOfDoor { get; set; }
     protected override string materialType { get; set; }
     protected override bool locked { get; set; }
@@ -18,7 +18,7 @@ public class MetalDoor : Door
         name = nameOfDoor;
     }
 
-    //methods
+    //Overridden Open function; checks if door is unlocked and closed, and if so, opens.
     public override void Open()
     {
         if(!locked && !isOpen)
@@ -28,6 +28,7 @@ public class MetalDoor : Door
         }
     }
 
+    //Overridden close function; checks if door is unlocked and open, and if so, closes.
     public override void Close()
     {
         if (!locked && isOpen)
@@ -37,11 +38,13 @@ public class MetalDoor : Door
         }
     }
 
+    //Overridden lock function; locks the door to prevent 'Open' and 'Close' functions to execute.
     public override void Lock()
     {
         locked = true;
     }
 
+    //Overridden unlock function; unlocks the door to allow 'Open' and 'Close' functions to execute.
     public override void Unlock()
     {
         locked = false;

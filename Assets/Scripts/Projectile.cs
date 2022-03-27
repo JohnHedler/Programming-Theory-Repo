@@ -24,6 +24,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //add force only one time when projectile is instantiated; prevents it traveling faster
         if (!fired)
         {
             fired = true;
@@ -33,6 +34,7 @@ public class Projectile : MonoBehaviour
         CheckFiredTime();
     }
 
+    //CheckFiredTime method; destroys projectile object if it has been on the map too long
     private void CheckFiredTime()
     {
         firedTime += Time.deltaTime;
@@ -43,13 +45,16 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    //When projectile object collides with something
     private void OnCollisionEnter(Collision collision)
     {
+        //if the tag is 'Enemy', then force it to take damage
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Drone>().TakeDamage(projectileDamage);
         }
 
+        //destroy the projectile object when done
         Destroy(gameObject);
     }
 }

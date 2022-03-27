@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
+    //UI/HUD variables
     private GameObject tutorialPanel;
 
     private Image heart1;
@@ -22,12 +23,8 @@ public class UIHandler : MonoBehaviour
         heart2 = GameObject.Find("Heart2").GetComponent<Image>();
         heart3 = GameObject.Find("Heart3").GetComponent<Image>();
     }
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
-
+    //UpdateHealth function; displays the appropriate amount of health user has on HUD
     public void UpdateHealth(int health)
     {
         switch (health)
@@ -70,6 +67,7 @@ public class UIHandler : MonoBehaviour
         }
     }
 
+    //ToggleTutorial function; shows/hides the tutorial panel on the HUD
     public void ToggleTutorial()
     {
         if (tutorialPanel.activeSelf)

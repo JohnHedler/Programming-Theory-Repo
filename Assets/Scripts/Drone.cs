@@ -34,10 +34,12 @@ public class Drone : Enemy
 
     private void Start()
     {
-        //find the child object associated with this specific game object
+        //find the child object associated with this specific game object for color changing
         enemyRenderer = transform.GetChild(0).GetComponent<Renderer>();
 
+        //get the original color of the object
         defaultColor = enemyRenderer.material.color;
+
         enemyDS = GetComponent<DeathSystem>();
         enemyRb = GetComponent<Rigidbody>();
     }
@@ -49,72 +51,90 @@ public class Drone : Enemy
             Move();
         }
 
+        //destroy object if it falls below map
         if(transform.position.y < 0)
         {
             Destroy(gameObject);
         }
     }
 
+    //when colliding with something
     private void OnCollisionEnter(Collision collision)
     {
         if (!attackOnCooldown)
         {
+            //check if it is the player that collides with the object
             if (collision.gameObject.name == "Player")
             {
                 attackOnCooldown = true;
 
                 Rigidbody entityRb = collision.gameObject.GetComponent<Rigidbody>();
 
+                //check the distance between the object and the player
                 Vector3 awayFromEnemy = collision.gameObject.transform.position - transform.position;
 
+                //knock the player away from the object in the direction from the collision point
                 entityRb.AddForce(awayFromEnemy * knockback, ForceMode.Impulse);
                 entityRb.AddForce(Vector3.up * knockbackUp, ForceMode.Impulse);
 
+                //damage the player
                 Damage();
 
+                //start cooldown to prevent repeated damage on multiple collisions with same object
                 StartCoroutine(AttackCooldown());
             }
         }
     }
 
+    //collision attack cooldown
     IEnumerator AttackCooldown()
     {
         yield return new WaitForSeconds(attackCooldown);
         attackOnCooldown = false;
     }
 
+    //TakeDamage function; object receives damage from outside source calling function
     public void TakeDamage(int damage)
     {
         if (!hit)
         {
             hit = true;
 
+            //change child object (body) color to red
             enemyRenderer.material.SetColor("_Color", hitColor);
 
+            //reduce object's health points by damage taken
             health -= damage;
 
+            //if object's health reaches zero, call function to destroy it
             if (health <= 0)
             {
                 enemyDS.Defeated();
             }
 
+            //start damage cooldown to prevent repeated collisions that do damage to object
             StartCoroutine(WasHit());
         }
     }
 
+    //delay between taking damage; prevents additional collisions and makes object 'immune' to damage
     IEnumerator WasHit()
     {
         yield return new WaitForSeconds(1);
         hit = false;
+
+        //return child object's (body) color back to the original color
         enemyRenderer.material.SetColor("_Color", defaultColor);
     }
 
+    //overridden damage function; finds the player object and gets its health, then reduces it
     protected override void Damage()
     {
         HealthSystem playerHealth = GameObject.Find("Player").GetComponent<HealthSystem>();
         playerHealth.health -= damage;
     }
 
+    //overridden move function; randomly moves forward or turns
     protected override void Move()
     {
         moved = true;
@@ -143,6 +163,7 @@ public class Drone : Enemy
         StartCoroutine(MoveDelay());
     }
 
+    //delay between movement
     IEnumerator MoveDelay()
     {
         yield return new WaitForSeconds(moveDelayTime);

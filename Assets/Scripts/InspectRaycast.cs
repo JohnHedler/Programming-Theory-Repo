@@ -5,19 +5,22 @@ using UnityEngine.UI;
 
 public class InspectRaycast : MonoBehaviour
 {
+    //Raycast variables
     private int rayLength = 5;
     private LayerMask layerMaskInteract;
     private ObjectController raycastedObj;
     private InspectController inspectController;
     private Button raycastedObjButton;
 
+    //crosshair variables
     public Sprite crosshairOne;
     public Sprite crosshairTwo;
     private RectTransform crosshair;
     private Image crosshairImage;
+
+    //inspect variables
     private bool isCrosshairActive;
     private bool doOnce;
-
     public bool inspectOn = false;
 
     private void Start()
@@ -34,8 +37,10 @@ public class InspectRaycast : MonoBehaviour
         RaycastHit hit;
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
+        //check if Raycast hits anything in the direction the player is looking
         if (Physics.Raycast(transform.position, fwd, out hit, rayLength, layerMaskInteract.value))
         {
+            //check if inspect mode is on. if so, then follow InspectObject, otherwise follow UseObject.
             if (inspectOn)
             {
                 InspectObject(hit);
@@ -69,6 +74,8 @@ public class InspectRaycast : MonoBehaviour
         }
     }
 
+    //CrosshairChangeImage function; changes the sprite image and size depending on if user is in
+    //  inspect mode or not.
     public void CrosshairChangeImage()
     {
         if (inspectOn)
@@ -87,6 +94,8 @@ public class InspectRaycast : MonoBehaviour
         inspectController.HideName();
     }
 
+    //CrosshairChangeColor function; changes the crosshair when the user looks at something that
+    // can be interacted with using Inspect mode or Use mode.
     void CrosshairChangeColor(bool on)
     {
         if (on && !doOnce)
@@ -115,6 +124,9 @@ public class InspectRaycast : MonoBehaviour
         }
     }
 
+    //InspectObject function; checks if Raycast has hit an object that can be interacted with.
+    //  Calls to show the user the object name, and calls for crosshair change. If the user
+    //  left-clicks while looking at object, then call the object's 'ShowExtraInfo'.
     void InspectObject(RaycastHit hit)
     {
         if (hit.collider.CompareTag("InteractObject"))
@@ -136,6 +148,9 @@ public class InspectRaycast : MonoBehaviour
         }
     }
 
+    //UseObject function; checks to see if the Raycast has hit an object that can be used.
+    //  Calls to show the user the name of the object, and calls for crosshair color change.
+    //  If the user presses the 'E' key, then the object's 'Use' is called.
     void UseObject(RaycastHit hit)
     {
         if (hit.collider.CompareTag("UseObject"))

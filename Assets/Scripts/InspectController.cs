@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class InspectController : MonoBehaviour
 {
+    //User Inspect HUD variables
     private GameObject objectNameBG;
     private Text objectNameUI;
-
     private GameObject extraInfoBG;
     private Text extraInfoUI;
 
+    //Extra info timer variables
     private float onScreenTimer = 5.0f;
     private bool startTimer = false;
     private float timer = 0;
@@ -29,6 +30,8 @@ public class InspectController : MonoBehaviour
 
     private void Update()
     {
+        //When startTimer is set to true, then count down to zero. Once timer reaches zero,
+        //  clear the extra info off of the user's HUD on the screen.
         if (startTimer)
         {
             timer -= Time.deltaTime;
@@ -42,18 +45,21 @@ public class InspectController : MonoBehaviour
         }
     }
 
+    //ShowName function; displays the name background and the object name on the HUD
     public void ShowName(string objectName)
     {
         objectNameBG.SetActive(true);
         objectNameUI.text = objectName;
     }
 
+    //HideName function; hides the name background and the object name on the HUD
     public void HideName()
     {
         objectNameBG.SetActive(false);
         objectNameUI.text = "";
     }
 
+    //ShowAdditionalInfo function; displays the description background and text on the HUD
     public void ShowAdditionalInfo(string newInfo)
     {
         timer = onScreenTimer;
@@ -62,6 +68,7 @@ public class InspectController : MonoBehaviour
         extraInfoUI.text = newInfo;
     }
 
+    //ClearAdditionalInfo function; hides the description background and text on the HUD
     void ClearAdditionalInfo()
     {
         extraInfoBG.SetActive(false);
