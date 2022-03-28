@@ -10,6 +10,8 @@ using UnityEngine.UI;
 public class Bunny : Animal
 {
     //variables
+    private string bunnyName;
+
     private int moveDelayTime = 1;
     private int eatDelayTime = 10;
     private float speed = 100.0f;
@@ -31,14 +33,14 @@ public class Bunny : Animal
         //      ENCAPSULATION
         //==========================
 
-        get { return nameOfAnimal; }
+        get { return bunnyName; }
         set
         {
             if (value != null && value != "")
             {
                 if (value.Length > 0 && value.Length < 15)
                 {
-                    nameOfAnimal = value;
+                    bunnyName = value;
                 }
                 else
                 {
@@ -61,7 +63,7 @@ public class Bunny : Animal
         color = "Gray";
         preferredFood = "Carrot";
 
-        name = nameOfAnimal;
+        name = bunnyName;
         bunnyRb = GetComponent<Rigidbody>();
     }
 

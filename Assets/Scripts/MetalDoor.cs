@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class MetalDoor : Door
 {
+    //variables
+    private string doorName;
+
     //==========================
     //      POLYMORPHISM
     //==========================
@@ -19,14 +22,14 @@ public class MetalDoor : Door
         //      ENCAPSULATION
         //==========================
 
-        get { return nameOfDoor; }
+        get { return doorName; }
         set
         {
             if(value != null && value != "")
             {
                 if(value.Length > 0 && value.Length < 15)
                 {
-                    nameOfDoor = value;
+                    doorName = value;
                 }
                 else
                 {
@@ -48,7 +51,7 @@ public class MetalDoor : Door
         nameOfDoor = "Metal Door";
         materialType = "Metal";
         locked = false;
-        name = nameOfDoor;
+        name = doorName;
     }
 
     //==========================
