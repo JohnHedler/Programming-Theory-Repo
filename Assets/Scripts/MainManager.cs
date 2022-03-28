@@ -21,4 +21,10 @@ public class MainManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public void GameOver()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
+    }
 }

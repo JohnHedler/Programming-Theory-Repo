@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     public Projectile projectilePrefab;
     public GameObject firePoint;
 
+    //out of bounds
+    private DeathSystem deathSystem;
+
     private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -44,11 +47,14 @@ public class PlayerController : MonoBehaviour
         inspectRaycast = Camera.main.GetComponent<InspectRaycast>();
         crosshair = GameObject.Find("Crosshair");
         userInterface = GameObject.Find("UI Handler").GetComponent<UIHandler>();
+        deathSystem = GetComponent<DeathSystem>();
     }
 
     private void Update()
     {
         GetInputs();
+
+        PlayerOutOfBounds();
     }
 
     private void FixedUpdate()
@@ -144,6 +150,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             isOnGround = false;
+        }
+    }
+
+    private void PlayerOutOfBounds()
+    {
+        if(transform.position.y < -5)
+        {
+            deathSystem.Defeated();
         }
     }
 }

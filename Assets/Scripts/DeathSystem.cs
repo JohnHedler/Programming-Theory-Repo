@@ -17,8 +17,8 @@ public class DeathSystem : MonoBehaviour
     {
         if(entity.name == "Player")
         {
-            Debug.Log("You have lost");
-            //call game over from game manager
+            UIHandler userInterface = GameObject.Find("UI Handler").GetComponent<UIHandler>();
+            userInterface.DisplayGameOver();
         }
         else
         {

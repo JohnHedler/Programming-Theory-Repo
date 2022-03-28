@@ -7,6 +7,7 @@ public class UIHandler : MonoBehaviour
 {
     //UI/HUD variables
     private GameObject tutorialPanel;
+    private GameObject gameOverPanel;
 
     private Image heart1;
     private Image heart2;
@@ -18,10 +19,20 @@ public class UIHandler : MonoBehaviour
     void Start()
     {
         tutorialPanel = GameObject.Find("Tutorial Panel");
+        gameOverPanel = GameObject.Find("Game Over Panel");
+        gameOverPanel.SetActive(false);
 
         heart1 = GameObject.Find("Heart1").GetComponent<Image>();
         heart2 = GameObject.Find("Heart2").GetComponent<Image>();
         heart3 = GameObject.Find("Heart3").GetComponent<Image>();
+    }
+
+    //DisplayGameOver function; displays the 'Game Over Panel' and the objects within.
+    //  Then, call GameOver from MainManager.
+    public void DisplayGameOver()
+    {
+        gameOverPanel.SetActive(true);
+        MainManager.instance.GameOver();
     }
 
     //UpdateHealth function; displays the appropriate amount of health user has on HUD
