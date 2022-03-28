@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//==========================
+//      INHERITANCE
+//==========================
+
 public class Drone : Enemy
 {
     //movement variables
@@ -85,6 +89,10 @@ public class Drone : Enemy
             }
         }
     }
+
+    //==========================
+    //      ABSTRACTION
+    //==========================
 
     //collision attack cooldown
     IEnumerator AttackCooldown()

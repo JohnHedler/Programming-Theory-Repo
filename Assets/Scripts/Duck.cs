@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//==========================
+//      INHERITANCE
+//==========================
+
 public class Duck : Animal
 {
     //variables
@@ -15,8 +19,37 @@ public class Duck : Animal
 
     Rigidbody duckRb;
 
+    //==========================
+    //      POLYMORPHISM
+    //==========================
+
     //properties
-    protected override string nameOfAnimal { get; set; }
+    protected override string nameOfAnimal
+    {
+        //==========================
+        //      ENCAPSULATION
+        //==========================
+
+        get { return nameOfAnimal; }
+        set
+        {
+            if (value != null && value != "")
+            {
+                if (value.Length > 0 && value.Length < 15)
+                {
+                    nameOfAnimal = value;
+                }
+                else
+                {
+                    Debug.Log("Name cannot exceed 15 characters.");
+                }
+            }
+            else
+            {
+                Debug.Log("Name cannot be null or empty.");
+            }
+        }
+    }
     protected override string color { get; set; }
     protected override string preferredFood { get; set; }
 
@@ -50,6 +83,10 @@ public class Duck : Animal
             Destroy(gameObject);
         }
     }
+
+    //==========================
+    //      ABSTRACTION
+    //==========================
 
     //overridden move function; randomly moves forward or turns
     protected override void Move()

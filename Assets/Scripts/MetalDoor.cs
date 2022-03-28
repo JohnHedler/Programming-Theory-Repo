@@ -2,10 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//==========================
+//      INHERITANCE
+//==========================
+
 public class MetalDoor : Door
 {
+    //==========================
+    //      POLYMORPHISM
+    //==========================
+
     //overridden properties from Door superclass
-    protected override string nameOfDoor { get; set; }
+    protected override string nameOfDoor
+    {
+        //==========================
+        //      ENCAPSULATION
+        //==========================
+
+        get { return nameOfDoor; }
+        set
+        {
+            if(value != null && value != "")
+            {
+                if(value.Length > 0 && value.Length < 15)
+                {
+                    nameOfDoor = value;
+                }
+                else
+                {
+                    Debug.Log("Name cannot exceed 15 characters.");
+                }
+            }
+            else
+            {
+                Debug.Log("Name cannot be null or empty.");
+            }
+        }
+    }
     protected override string materialType { get; set; }
     protected override bool locked { get; set; }
     public override bool isOpen { get; set; }
@@ -17,6 +50,10 @@ public class MetalDoor : Door
         locked = false;
         name = nameOfDoor;
     }
+
+    //==========================
+    //      ABSTRACTION
+    //==========================
 
     //Overridden Open function; checks if door is unlocked and closed, and if so, opens.
     public override void Open()
